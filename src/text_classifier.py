@@ -50,16 +50,16 @@ high_sort_order = True
 low_sort_order = False
 run_case = True
 
-max_depth = 2000
-num_trees = 10
-num_split_candidates = 20
+max_depth = 3
+num_trees = 1000
+num_split_candidates = 3
 
 tree_lim = 200
 
 # model settings
 gram_num = 200
 high_freq = 236
-low_freq = 1
+low_freq = 100
 alpha_num = 1
 
 # case settings
@@ -105,7 +105,10 @@ if run_case == True:
     recorder.record_samples(train_samples, 'train.samples-model')
 
     print("> building random forest samples")
-    num_split_candidates = len(list(train_samples[0][0].keys())) // 6000
+    num_split_candidates = len(list(train_samples[0][0].keys())) // 2
+    if num_split_candidates == 0:
+        num_split_candidates = 1
+
     trees = random_forest.build_random_forest(train_samples, max_depth, num_trees, num_split_candidates)
     # clf.fit(train_samples, train_samples_classes)
 
@@ -145,7 +148,7 @@ else:
         recorder.init_forest()
 
         print("> building random forest samples")
-        num_split_candidates = len(list(train_samples[0][0].keys())) // 6000
+        num_split_candidates = len(list(train_samples[0][0].keys())) // 2
         trees = random_forest.build_random_forest(train_samples, max_depth, num_trees, num_split_candidates)
         # clf.fit(train_samples, train_samples_classes)
 

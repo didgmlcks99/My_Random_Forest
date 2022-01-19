@@ -47,16 +47,16 @@ def record_samples(samples, fn):
             file.write(line)
 
 def compacted_sample(sample):
-    n = 5
+    n = 3
     keys = list(sample[0].keys())
 
     line = '({'
-    for i in range(5):
+    for i in range(n):
         line += '\'' + str(keys[i]) + '\': ' + str(sample[0][keys[i]])
         if i != n-1:
             line += ', '
         else:
-            line += ', ...'
+            line += ', ...' + str(len(sample[0])) + 'more'
     line += '}, ' + str(sample[1]) + ')\n'
 
     return line

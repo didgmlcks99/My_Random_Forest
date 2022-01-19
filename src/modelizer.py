@@ -210,6 +210,9 @@ def print_result_info(result):
     acc = result[4]
     prec = result[5]
     rec = result[6]
+
+    max_depth = result[7]
+    num_trees = result[8]
     
     with open('../analysis/direction.csv', 'r') as file:
         csvFile = csv.reader(file)
@@ -221,7 +224,7 @@ def print_result_info(result):
             with open(row[0], 'a') as analysis_file:
                 writer = csv.writer(analysis_file)
 
-                line = [row[1], tp, fn, fp, tn, acc, prec, rec]
+                line = [row[1], max_depth, num_trees, tp, fn, fp, tn, acc, prec, rec]
                 print(row[0] + ' : ', end='')
                 print(line)
                 writer.writerow(line)
@@ -237,7 +240,11 @@ def mk_samples(samples, features_model, texts_cases, classed):
         tmp_sample = {}
 
         for feature in features_model.keys():
-            tmp_sample[feature] = text.count(feature)
+            if text.count(feature) == 0:
+                tmp_sample[feature] = 0
+            else:
+                tmp_sample[feature] = 1
+            # tmp_sample[feature] = text.count(feature)
             # tmp_sample.append(text.count(feature))
 
         samples.append((tmp_sample, classed))

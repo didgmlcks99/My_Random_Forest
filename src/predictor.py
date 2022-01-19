@@ -56,7 +56,7 @@ def get_model(model_fn):
     return p_model
 
 # new RF ================================================================================================================
-def test_random_forest(trees, tmp_model, gram_num, tk_case):
+def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees):
     # case settings
     test_neg_fn = '../data/test.negative.csv'
     test_non_fn = '../data/test.non-negative.csv'
@@ -76,10 +76,10 @@ def test_random_forest(trees, tmp_model, gram_num, tk_case):
 
     # results = clf.predict(test_samples)
     results = predict_samples(trees, test_samples)
-    print(results)
-    calc_statistics(test_samples, results)
+    # print(results)
+    calc_statistics(test_samples, results, max_depth, num_trees)
 
-def calc_statistics(test_samples, results):
+def calc_statistics(test_samples, results, max_depth, num_trees):
     print("> calculate random forest test results...")
 
     tp = 0
@@ -96,18 +96,22 @@ def calc_statistics(test_samples, results):
             tn += 1
         elif test_samples[i][1] == True and results[i] == False:
             fn += 1
-    print(tp)
-    print(fp)
-    print(tn)
-    print(fn)
+    
+    # print(tp)
+    # print(fp)
+    # print(tn)
+    # print(fn)
 
     acc = (tp + tn) / (tp + fn + tn + fp)
-    prec = tp / (tp + fp)
+    if tp == 0 and fp == 0:
+        prec = 0
+    else:
+        prec = tp / (tp + fp)
     rec = tp / (tp + fn)
 
     print("> done calculating random forest test results...")
     
-    result = [tp, tn, fp, fn, acc, prec, rec]
+    result = [tp, tn, fp, fn, acc, prec, rec, max_depth, num_trees]
     modelizer.print_result_info(result)
 
 # end new RF ============================================================================================================

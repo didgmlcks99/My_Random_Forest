@@ -30,7 +30,7 @@ def init_test_analysis(analysis_name):
     with open(analysis_name, 'w') as file:
         writer = csv.writer(file)
 
-        header = [set_name, 'tp', 'fn', 'fp', 'tn', 'accuracy', 'precision', 'recall']
+        header = [set_name, 'max_depth', 'num_trees', 'tp', 'fn', 'fp', 'tn', 'accuracy', 'precision', 'recall']
         writer.writerow(header)
         
 def direct_test(analysis_name, val):

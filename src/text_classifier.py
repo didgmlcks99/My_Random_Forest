@@ -51,7 +51,7 @@ low_sort_order = False
 run_case = True
 
 max_depth = 3
-num_trees = 1000
+num_trees = 100
 num_split_candidates = 3
 
 tree_lim = 200
@@ -59,7 +59,7 @@ tree_lim = 200
 # model settings
 gram_num = 200
 high_freq = 236
-low_freq = 100
+low_freq = 20
 alpha_num = 1
 
 # case settings
@@ -105,7 +105,7 @@ if run_case == True:
     recorder.record_samples(train_samples, 'train.samples-model')
 
     print("> building random forest samples")
-    num_split_candidates = len(list(train_samples[0][0].keys())) // 2
+    num_split_candidates = int(len(list(train_samples[0][0].keys())) * (2/3))
     if num_split_candidates == 0:
         num_split_candidates = 1
 

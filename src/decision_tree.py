@@ -3,6 +3,7 @@ import entropy
 from functools import partial
 
 def build_tree(inputs, current_depth, max_depth, num_split_candidates, split_candidates=None):
+
     if split_candidates is None:
         split_candidates = inputs[0][0].keys()
 
@@ -21,8 +22,8 @@ def build_tree(inputs, current_depth, max_depth, num_split_candidates, split_can
     if not sampled_split_candidates:
         return num_trues >= num_falses
     
-    if current_depth >= max_depth:
-        return num_trues >= num_falses
+    # if current_depth >= max_depth:
+    #     return num_trues >= num_falses
     
     best_attribute = min(sampled_split_candidates,
                             key=partial(entropy.partition_entropy_by, inputs))

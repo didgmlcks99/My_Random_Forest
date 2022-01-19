@@ -44,29 +44,29 @@ def read_train_data(read_fn, tk_case, gram_num, rec_text_fn, for_non):
 start = timeit.default_timer()
 
 # main settings
-tk_case = False
+tk_case = True
 default_sort_order = True
 high_sort_order = True
 low_sort_order = False
 run_case = True
 
-max_depth = 1000000000
-num_trees = 100
+max_depth = 100
+num_trees = 1
 num_split_candidates = 2
 
 tree_lim = 200
 
 # model settings
 gram_num = 200
-high_freq = 2
-low_freq = 0
+high_freq = 160
+low_freq = 5
 alpha_num = 1
 
 # case settings
-# train_neg_fn = '../data/train.negative.csv'
-# train_non_fn = '../data/train.non-negative.csv'
-train_neg_fn = '../data/mytrain.negative.csv'
-train_non_fn = '../data/mytrain.non-negative.csv'
+train_neg_fn = '../data/train.negative.csv'
+train_non_fn = '../data/train.non-negative.csv'
+# train_neg_fn = '../data/mytrain.negative.csv'
+# train_non_fn = '../data/mytrain.non-negative.csv'
 rec_train_neg_fn = '../record/train.negative.texts.txt'
 rec_train_non_fn = '../record/train.non-negative.texts.txt'
 
@@ -74,8 +74,8 @@ tmp = read_train_data(train_neg_fn, tk_case, gram_num, rec_train_neg_fn, True)
 train_neg_texts = tmp[0]
 main_neg_cases_count_dict = modelizer.sort_word_cases(tmp[1], default_sort_order)
 
-# tmp = read_train_data(train_non_fn, tk_case, gram_num, rec_train_non_fn, False)
-tmp = read_train_data(train_non_fn, tk_case, gram_num, rec_train_non_fn, True)
+tmp = read_train_data(train_non_fn, tk_case, gram_num, rec_train_non_fn, False)
+# tmp = read_train_data(train_non_fn, tk_case, gram_num, rec_train_non_fn, True)
 train_non_texts = tmp[0]
 main_non_cases_count_dict = modelizer.sort_word_cases(tmp[1], default_sort_order)
 
@@ -108,10 +108,10 @@ if run_case == True:
     recorder.record_samples(train_samples, 'train.samples-model')
 
     print("> building random forest samples")
-    # num_split_candidates = int(len(list(train_samples[0][0].keys())) * (2/3))
+    num_split_candidates = len(list(train_samples[0][0].keys()))
     # if num_split_candidates == 0:
     #     num_split_candidates = 1
-    for i in range(100):
+    for i in range(1):
         trees = random_forest.build_random_forest(train_samples, max_depth, num_trees, num_split_candidates)
         # clf.fit(train_samples, train_samples_classes)
 

@@ -70,6 +70,21 @@ def plot_graph(name):
 
         plt.show()
 
+        
+        
+        x = np.arange(3)
+        stats = list(res.keys())
+        vals = list(res.values())
+
+        plt.xlabel('results')
+        plt.ylabel('avg')
+        plt.title(title + 'results')
+
+        plt.bar(x, vals)
+        plt.xticks(x, stats)
+
+        plt.show()
+
 def get_average(list):
     size = len(list)
     tot_sum = 0

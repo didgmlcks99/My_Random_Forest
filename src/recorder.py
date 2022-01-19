@@ -43,8 +43,8 @@ def direct_test(analysis_name, val):
 def record_samples(samples, fn):
     with open('../model/'+fn+'.txt', 'w') as file:
         for i in range(len(samples)):
-            # line = str(i+1) + ". " + compacted_sample(samples[i])
-            line = str(i+1) + '. ' + str(samples[i]) + '\n'
+            line = str(i+1) + ". " + compacted_sample(samples[i])
+            # line = str(i+1) + '. ' + str(samples[i]) + '\n'
             file.write(line)
 
 def compacted_sample(sample):

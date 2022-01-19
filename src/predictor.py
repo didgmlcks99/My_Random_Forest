@@ -60,10 +60,12 @@ def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees
     # case settings
     # test_neg_fn = '../data/test.negative.csv'
     # test_non_fn = '../data/test.non-negative.csv'
+    test_neg_fn = '../data/train.negative.csv'
+    test_non_fn = '../data/train.non-negative.csv'
     # test_neg_fn = '../data/mytest.negative.csv'
     # test_non_fn = '../data/mytest.non-negative.csv'
-    test_neg_fn = '../data/mytrain.negative.csv'
-    test_non_fn = '../data/mytrain.non-negative.csv'
+    # test_neg_fn = '../data/mytrain.negative.csv'
+    # test_non_fn = '../data/mytrain.non-negative.csv'
     rec_test_neg_fn = '../record/test.negative.texts.txt'
     rec_test_non_fn = '../record/test.non-negative.texts.txt'
 

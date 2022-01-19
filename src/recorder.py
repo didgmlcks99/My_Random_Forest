@@ -30,7 +30,7 @@ def init_test_analysis(analysis_name):
     with open(analysis_name, 'w') as file:
         writer = csv.writer(file)
 
-        header = [set_name, 'max_depth', 'num_trees', 'tp', 'fn', 'fp', 'tn', 'accuracy', 'precision', 'recall']
+        header = [set_name, 'n_cand', 'max_depth', 'num_trees', 'tp', 'fn', 'fp', 'tn', 'accuracy', 'precision', 'recall']
         writer.writerow(header)
         
 def direct_test(analysis_name, val):
@@ -43,7 +43,8 @@ def direct_test(analysis_name, val):
 def record_samples(samples, fn):
     with open('../model/'+fn+'.txt', 'w') as file:
         for i in range(len(samples)):
-            line = str(i+1) + ". " + compacted_sample(samples[i])
+            # line = str(i+1) + ". " + compacted_sample(samples[i])
+            line = str(i+1) + '. ' + str(samples[i]) + '\n'
             file.write(line)
 
 def compacted_sample(sample):

@@ -213,6 +213,7 @@ def print_result_info(result):
 
     max_depth = result[7]
     num_trees = result[8]
+    num_split_candidates = result[9]
     
     with open('../analysis/direction.csv', 'r') as file:
         csvFile = csv.reader(file)
@@ -224,7 +225,7 @@ def print_result_info(result):
             with open(row[0], 'a') as analysis_file:
                 writer = csv.writer(analysis_file)
 
-                line = [row[1], max_depth, num_trees, tp, fn, fp, tn, acc, prec, rec]
+                line = [row[1], num_split_candidates, max_depth, num_trees, tp, fn, fp, tn, acc, prec, rec]
                 print(row[0] + ' : ', end='')
                 print(line)
                 writer.writerow(line)

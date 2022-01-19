@@ -3,7 +3,7 @@ import decision_tree
 import recorder
 from collections import Counter
 
-def build_random_forest(input, max_depth, n_trees, num_split_candidates=3):
+def build_random_forest(input, max_depth=1000000000, n_trees=100, num_split_candidates=2):
     i = 1
     random_forest = []
     for _ in range(n_trees):

@@ -56,10 +56,14 @@ def get_model(model_fn):
     return p_model
 
 # new RF ================================================================================================================
-def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees):
+def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees, num_split_candidates):
     # case settings
-    test_neg_fn = '../data/test.negative.csv'
-    test_non_fn = '../data/test.non-negative.csv'
+    # test_neg_fn = '../data/test.negative.csv'
+    # test_non_fn = '../data/test.non-negative.csv'
+    # test_neg_fn = '../data/mytest.negative.csv'
+    # test_non_fn = '../data/mytest.non-negative.csv'
+    test_neg_fn = '../data/mytrain.negative.csv'
+    test_non_fn = '../data/mytrain.non-negative.csv'
     rec_test_neg_fn = '../record/test.negative.texts.txt'
     rec_test_non_fn = '../record/test.non-negative.texts.txt'
 
@@ -77,9 +81,9 @@ def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees
     # results = clf.predict(test_samples)
     results = predict_samples(trees, test_samples)
     # print(results)
-    calc_statistics(test_samples, results, max_depth, num_trees)
+    calc_statistics(test_samples, results, max_depth, num_trees, num_split_candidates)
 
-def calc_statistics(test_samples, results, max_depth, num_trees):
+def calc_statistics(test_samples, results, max_depth, num_trees, num_split_candidates):
     print("> calculate random forest test results...")
 
     tp = 0
@@ -104,14 +108,14 @@ def calc_statistics(test_samples, results, max_depth, num_trees):
 
     acc = (tp + tn) / (tp + fn + tn + fp)
     if tp == 0 and fp == 0:
-        prec = 0
+        prec = 0.0
     else:
         prec = tp / (tp + fp)
     rec = tp / (tp + fn)
 
     print("> done calculating random forest test results...")
     
-    result = [tp, tn, fp, fn, acc, prec, rec, max_depth, num_trees]
+    result = [tp, tn, fp, fn, acc, prec, rec, max_depth, num_trees, num_split_candidates]
     modelizer.print_result_info(result)
 
 # end new RF ============================================================================================================

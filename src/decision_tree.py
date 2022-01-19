@@ -1,9 +1,15 @@
+import random
 import entropy
 from functools import partial
 
-def build_tree(inputs, split_candidates=None):
+def build_tree(inputs, current_depth, max_depth, num_split_candidates, split_candidates=None):
     if split_candidates is None:
         split_candidates = inputs[0][0].keys()
+
+    if len(split_candidates) <= num_split_candidates:
+        sampled_split_candidates = split_candidates
+    else:
+        sampled_split_candidates = random.sample(split_candidates, num_split_candidates)
     
     num_inputs = len(inputs)
     num_trues = len([label for item, label in inputs if label])
@@ -12,17 +18,20 @@ def build_tree(inputs, split_candidates=None):
     if num_trues == 0 : return False
     if num_falses == 0 : return True
 
-    if not split_candidates:
+    if not sampled_split_candidates:
         return num_trues >= num_falses
     
-    best_attribute = min(split_candidates,
+    if current_depth >= max_depth:
+        return num_trues >= num_falses
+    
+    best_attribute = min(sampled_split_candidates,
                             key=partial(entropy.partition_entropy_by, inputs))
     
     partitions = entropy.partition_by(inputs, best_attribute)
     new_candidates = [a for a in split_candidates
                         if a != best_attribute]
 
-    subtrees = {attribute_value : build_tree(subset, new_candidates)
+    subtrees = {attribute_value : build_tree(subset, current_depth+1, max_depth, num_split_candidates, new_candidates)
                 for attribute_value, subset in partitions.items()}
     
     subtrees[None] = num_trues > num_falses
@@ -31,8 +40,7 @@ def build_tree(inputs, split_candidates=None):
 
 
 def classify(tree, input):
-    if tree in [True, False]:
-        return tree
+    if tree in [True, False]: return tree
     
     attribute, subtree_dict = tree
 

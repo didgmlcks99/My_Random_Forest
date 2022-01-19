@@ -1,6 +1,8 @@
 import math
 from collections import Counter
 from collections import defaultdict
+import sys
+sys.setrecursionlimit(10**7)
 
 # 1. returns the calculated entropy of single attribute
 def partition_entropy_by(inputs, attribute):

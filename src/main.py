@@ -1,4 +1,8 @@
-import decision_tree
+import random_forest
+
+# default settings
+num_trees = 3
+num_split_candidates = 2
 
 keys = ['level', 'lang', 'tweets', 'phd']
 
@@ -17,7 +21,8 @@ inputs = [({'level':'Senior', 'lang':'Java', 'tweets':'no', 'phd':'no'}, False),
             ({'level':'Mid', 'lang':'Java', 'tweets':'yes', 'phd':'no'}, True),
             ({'level':'Junior', 'lang':'Python', 'tweets':'no', 'phd':'yes'}, False),]
 
-tree = decision_tree.build_tree(inputs)
-decision_tree.print_tree(tree, 0)
-
-print(decision_tree.classify(tree, {'level':'Junior', 'lang':'Java', 'tweets':'yes', 'phd':'no'}))
+trees = random_forest.build_random_forest(inputs, num_trees, num_split_candidates)
+# random_forest.print_random_forest(trees)
+res = random_forest.forest_classify(trees, {'level':'Junior', 'lang':'Java', 'tweets':'yes', 'phd':'no'})
+print(res)
+# print(decision_tree.classify(tree, {'level':'Junior', 'lang':'Java', 'tweets':'yes', 'phd':'no'}))

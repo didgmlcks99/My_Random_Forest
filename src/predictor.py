@@ -58,10 +58,10 @@ def get_model(model_fn):
 # new RF ================================================================================================================
 def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees, num_split_candidates):
     # case settings
-    # test_neg_fn = '../data/test.negative.csv'
-    # test_non_fn = '../data/test.non-negative.csv'
-    test_neg_fn = '../data/train.negative.csv'
-    test_non_fn = '../data/train.non-negative.csv'
+    test_neg_fn = '../data/test.negative.csv'
+    test_non_fn = '../data/test.non-negative.csv'
+    # test_neg_fn = '../data/train.negative.csv'
+    # test_non_fn = '../data/train.non-negative.csv'
     # test_neg_fn = '../data/mytest.negative.csv'
     # test_non_fn = '../data/mytest.non-negative.csv'
     # test_neg_fn = '../data/mytrain.negative.csv'
@@ -77,10 +77,8 @@ def test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees
     modelizer.mk_samples(test_samples, tmp_model, test_neg_text_cases, True)
     modelizer.mk_samples(test_samples, tmp_model, test_non_text_cases, False)
 
-    # test_samples = StandardScaler().fit(test_samples).transform(test_samples)
     recorder.record_samples(test_samples, 'test.samples-model')
 
-    # results = clf.predict(test_samples)
     results = predict_samples(trees, test_samples)
     # print(results)
     calc_statistics(test_samples, results, max_depth, num_trees, num_split_candidates)

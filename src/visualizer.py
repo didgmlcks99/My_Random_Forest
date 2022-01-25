@@ -53,35 +53,51 @@ def plot_graph(name):
         res['precision'] = get_average(precision)
         res['recall'] = get_average(recall)
 
-        folders = name.split('/')
-        file = folders[3].split('.')
-        title = file[0]
+        # folders = name.split('/')
+        # file = folders[3].split('.')
+        # title = file[0]
 
-        x = np.arange(4)
-        stats = list(stat.keys())
-        vals = list(stat.values())
+        # x = np.arange(4)
+        # stats = list(stat.keys())
+        # vals = list(stat.values())
 
-        plt.xlabel('stat')
-        plt.ylabel('avg')
-        plt.title(title + "stats")
+        # plt.xlabel('stat')
+        # plt.ylabel('avg')
+        # plt.title(title + "stats")
 
-        plt.bar(x, vals)
-        plt.xticks(x, stats)
+        # plt.bar(x, vals)
+        # plt.xticks(x, stats)
 
-        plt.show()
+        # plt.show()
 
         
         
-        x = np.arange(3)
-        stats = list(res.keys())
-        vals = list(res.values())
+        # x = np.arange(3)
+        # stats = list(res.keys())
+        # vals = list(res.values())
 
-        plt.xlabel('results')
-        plt.ylabel('avg')
-        plt.title(title + 'results')
+        # plt.xlabel('results')
+        # plt.ylabel('avg')
+        # plt.title(title + 'results')
 
-        plt.bar(x, vals)
-        plt.xticks(x, stats)
+        # plt.bar(x, vals)
+        # plt.xticks(x, stats)
+
+        # plt.show()
+
+        print(stat)
+        print(res)
+
+        x = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
+        acc_y = accuracy
+        prec_y = precision
+        rec_y = recall
+
+        plt.plot(x, acc_y)
+        plt.plot(x, prec_y)
+        plt.plot(x, rec_y)
+
+        plt.legend(['accuracy', 'precision', 'recall'])
 
         plt.show()
 

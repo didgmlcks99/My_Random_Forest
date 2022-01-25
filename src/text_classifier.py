@@ -51,15 +51,15 @@ low_sort_order = False
 run_case = True
 
 max_depth = 100
-num_trees = 1
+num_trees = 100
 num_split_candidates = 2
 
 tree_lim = 200
 
 # model settings
 gram_num = 200
-high_freq = 160
-low_freq = 5
+high_freq = 6000
+low_freq = 10
 alpha_num = 1
 
 # case settings
@@ -95,15 +95,11 @@ if run_case == True:
     recorder.direct_test(name, str(high_freq)+'/'+str(low_freq))
 
     # new RF ================================================================================================================
-    # clf = RandomForestClassifier(random_state=0)
-
     train_samples = []
 
     modelizer.mk_samples(train_samples, tmp_model, train_neg_texts, True)
     modelizer.mk_samples(train_samples, tmp_model, train_non_texts, False)
 
-    # print("> scaling sample features")
-    # train_samples = StandardScaler().fit(train_samples).transform(train_samples)
     print("> recording train samples")
     recorder.record_samples(train_samples, 'train.samples-model')
 
@@ -113,8 +109,6 @@ if run_case == True:
     #     num_split_candidates = 1
     for i in range(1):
         trees = random_forest.build_random_forest(train_samples, max_depth, num_trees, num_split_candidates)
-        # clf.fit(train_samples, train_samples_classes)
-
         predictor.test_random_forest(trees, tmp_model, gram_num, tk_case, max_depth, num_trees, num_split_candidates)
     
     # end new RF ============================================================================================================

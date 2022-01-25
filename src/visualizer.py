@@ -88,7 +88,7 @@ def plot_graph(name):
         print(stat)
         print(res)
 
-        x = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7']
+        x = ['c1', 'c2']
         acc_y = accuracy
         prec_y = precision
         rec_y = recall

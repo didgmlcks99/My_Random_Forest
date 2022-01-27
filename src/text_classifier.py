@@ -58,7 +58,7 @@ tree_lim = 200
 
 # model settings
 gram_num = 200
-high_freq = 6000
+high_freq = 5800
 low_freq = 10
 alpha_num = 1
 
